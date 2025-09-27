@@ -1,6 +1,8 @@
 package com.example.viewpager2classproject1
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -15,12 +17,14 @@ class MainActivity : AppCompatActivity() {
     //Step1: Declare variables
 
     private lateinit var viewPager: ViewPager2
-    private lateinit var pagerAdapter: ViewPagerAdapter2
+    private lateinit var pagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        Step 6:  Set Adapter
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -30,23 +34,27 @@ class MainActivity : AppCompatActivity() {
 }
 
 //Step 2: Create ViewPagerAdapter Class
-class ViewPagerAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ViewPagerAdapter: RecyclerView.Adapter<ViewHolder>(){
 
     //Step 4: Create a list of items
     private val itemList = listOf(
         "Sometimes life gets the best of you",
-        "It's ok to fall down","as long as you stand back up")
+        "It's ok to fall down",
+        "as long as you stand back up"
+    )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.page_layout, parent, false)
+        return com.example.viewpagertext.ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return itemList.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = itemList[position]
+        holder.bind(item)
     }
 }
 
