@@ -24,7 +24,12 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        Step 6:  Set Adapter
+        //Step 6:  Set Adapter
+
+        viewPager = findViewById(R.id.viewPager)
+        pagerAdapter = ViewPagerAdapter()
+        viewPager.adapter = pagerAdapter
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -45,7 +50,7 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.page_layout, parent, false)
-        return com.example.viewpagertext.ViewHolder(view)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
